@@ -1,5 +1,4 @@
 <template>
-
     <div class="bg-danger h-100" @click="handleClick()">
         <header class="rounded bg-light w-50">Тренажер слепой печати</header>
         <input ref="textInput" type="text" id="certificate-input" autofocus v-model="text"/>
@@ -13,7 +12,6 @@
             </div>
         </footer>
     </div>
-
 </template>
 
 <script>

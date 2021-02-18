@@ -1,12 +1,10 @@
 <template>
     <div class="rounded bg-light w-50 d-inline-flex">
         <div>speed: {{speed}}</div>
-        <div>accuracy: {{100-mistakesRate | round(2)}}%</div>
+        <div>accuracy: {{100-mistakesRate*100 | round(2)}}%</div>
 
     </div>
 </template>
-
-
 <script>
 
     export default {
@@ -14,14 +12,13 @@
         props: ['symbols'],
         filters: {
             round(value, decimals) {
-                if(!value) {
-                    value = 0;
+                if (!value) {
+                    value = 100;
                 }
 
-                if(!decimals) {
+                if (!decimals) {
                     decimals = 0;
                 }
-
                 value = Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
                 return value;
             }
@@ -59,8 +56,13 @@
             getTypedSymbols(symbolsArray) {
                 return symbolsArray.filter(sym => sym.typed === true).length;
             },
-            calculateMistakes(newSymbols){
-                this.mistakesRate = newSymbols.filter(sym => sym.typed === true).length/newSymbols.length;
+            calculateMistakes(newSymbols) {
+                const mistakes = newSymbols.filter(sym => !sym.isValid && sym.typed).length;
+                console.log('mistakes', mistakes);
+                const typed = newSymbols.filter(sym => sym.typed === true).length;
+                console.log('typed', typed);
+                this.mistakesRate = mistakes / typed;
+                console.log(this.mistakesRate)
             }
         }
     }
