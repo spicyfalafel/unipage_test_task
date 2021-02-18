@@ -58,9 +58,7 @@
             },
             calculateMistakes(newSymbols) {
                 const mistakes = newSymbols.filter(sym => !sym.isValid && sym.typed).length;
-                console.log('mistakes', mistakes);
                 const typed = newSymbols.filter(sym => sym.typed === true).length;
-                console.log('typed', typed);
                 this.mistakesRate = mistakes / typed;
                 console.log(this.mistakesRate)
             }

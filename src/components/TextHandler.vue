@@ -4,6 +4,9 @@
         <div id="txt" class="rounded bg-light w-50" ref="txtDiv">
             <SymbolComponent v-for="(c, i) in symbs" :key="i" :symbol="c"/>
         </div>
+        <b-modal id="modal-1" title="BootstrapVue">
+            <p class="my-4">Congratulations!</p>
+        </b-modal>
     </div>
 </template>
 
@@ -43,6 +46,10 @@
                 });
             },
             handleTyping(newVal, oldValue) {
+                if (newVal.length === this.text.length + 1) {
+                    this.finishTyping();
+                    return;
+                }
                 const typedSymb = newVal.slice(-1);
                 if (newVal < oldValue) { // backspace
                     let erased = this.symbs[newVal.length];
@@ -59,6 +66,9 @@
                 }
             },
 
+            finishTyping() {
+                this.$bvModal.show("modal-1")
+            }
         },
         created() {
             this.getText();

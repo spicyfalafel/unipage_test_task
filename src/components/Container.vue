@@ -1,8 +1,11 @@
 <template>
-    <div class="bg-danger h-100" @click="handleClick()">
+
+    <div class="bg-danger" @click="handleClick()">
         <header class="rounded bg-light w-50">Тренажер слепой печати</header>
+
         <input ref="textInput" type="text" id="certificate-input" autofocus v-model="text"/>
         <TextHandler :userTyping="text"/>
+
         <footer>
             <div class="rounded bg-light w-50">
                 <p>Критерии оценки</p>
@@ -12,6 +15,7 @@
             </div>
         </footer>
     </div>
+
 </template>
 
 <script>
@@ -56,7 +60,6 @@
     }
 
     header {
-
         font-size: 2rem;
         margin: 0 auto;
     }
