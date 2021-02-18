@@ -6,7 +6,21 @@ export default class MySymbolModel {
         this.typed = typed;
     }
 
+    current = false;
+
     toString() {
         return `${this.id}:${this.symb}`;
+    }
+
+    makeCurrent() {
+        this.isValid = false;
+        this.current = true;
+        this.typed = false;
+    }
+
+    eraseSymbol() {
+        this.isValid = false;
+        this.current = false;
+        this.typed = false;
     }
 }

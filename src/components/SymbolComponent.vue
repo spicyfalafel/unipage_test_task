@@ -1,6 +1,7 @@
 <template>
-    <span class="w-auto" v-bind:class="{'bg-success': symbol.isValid,
-    'bg-danger': !symbol.isValid && symbol.typed}">{{symbol.symb}}</span>
+    <span class="w-auto" v-bind:class="{'bg-success text-white': symbol.isValid && symbol.typed,
+    'bg-danger text-white': !symbol.isValid && symbol.typed && !symbol.current,
+     'next': symbol.current && !symbol.typed}">{{symbol.symb}}</span>
 </template>
 
 <script>
@@ -12,4 +13,7 @@
 
 <style scoped>
 
+    .next {
+        border: 2px solid grey;
+    }
 </style>

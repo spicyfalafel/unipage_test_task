@@ -2,19 +2,17 @@
 
     <div class="bg-danger" @click="handleClick()">
         <input ref="textInput" type="text" id="certificate-input" autofocus  v-model="text"/>
-        <MainText :userTyping="text"/>
-        <Stats/>
+        <TextHandler :userTyping="text"/>
     </div>
 
 </template>
 
 <script>
-    import MainText from "@/components/MainText";
-    import Stats from "@/components/Stats";
+    import TextHandler from "@/components/TextHandler";
 
     export default {
         name: 'Container',
-        components: {MainText, Stats},
+        components: {TextHandler},
         methods:{
             handleClick(){
                 this.$refs.textInput.focus();
@@ -25,7 +23,6 @@
                 text: ''
             }
         }
-
     }
 </script>
 
