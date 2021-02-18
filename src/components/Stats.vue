@@ -1,6 +1,8 @@
 <template>
-    <div class="rounded bg-light w-50">
-        speed: {{speed}}
+    <div class="rounded bg-light w-50 d-inline-flex">
+        <div>speed: {{speed}}</div>
+        <div>accuracy: {{100-mistakesRate | round(2)}}%</div>
+
     </div>
 </template>
 
@@ -10,6 +12,20 @@
     export default {
         name: "Stats",
         props: ['symbols'],
+        filters: {
+            round(value, decimals) {
+                if(!value) {
+                    value = 0;
+                }
+
+                if(!decimals) {
+                    decimals = 0;
+                }
+
+                value = Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
+                return value;
+            }
+        },
         data() {
             return {
                 speed: 0,
@@ -17,12 +33,14 @@
                 lastTime: 0,
                 keysTyped: 0,
                 total: 0,
+                mistakesRate: 0
             }
         },
         watch: {
             symbols: {
                 handler(newVal) {
                     this.calculateSpeed(newVal);
+                    this.calculateMistakes(newVal);
                 },
                 deep: true
             }
@@ -40,6 +58,9 @@
             },
             getTypedSymbols(symbolsArray) {
                 return symbolsArray.filter(sym => sym.typed === true).length;
+            },
+            calculateMistakes(newSymbols){
+                this.mistakesRate = newSymbols.filter(sym => sym.typed === true).length/newSymbols.length;
             }
         }
     }
@@ -51,7 +72,4 @@
         text-align: start;
         padding: 10px 10px 10px 15px;
     }
-
-
-
 </style>

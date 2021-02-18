@@ -34,7 +34,6 @@
                 getTextFromApi()
                     .then(res => {
                         this.text = res.data[0].replaceAll("  ", " ");
-                        console.log(this.text);
                         for (let i = 0; i < this.text.length; i++) {
                             const currentSymb = new MySymbolModel(i, this.text[i], false, false);
                             this.symbs.push(currentSymb);
@@ -80,6 +79,4 @@
         margin: 0 auto;
         padding: 0;
     }
-
-
 </style>
